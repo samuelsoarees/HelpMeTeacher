@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:menubar>
+               
+                
+                <p:menuitem value="Home" url="TelaAluno.xhtml"/>
+                
+                
+                <p:menuitem value="Criar novo Chat" url="ListaProfessorChat.xhtml"/>
+                            
+                
+                    <p:submenu label="Configurações de Conta">
+                    <p:menuitem value="Aprensetar Dados" url="ApresentaAluno.xhtml"/> 
+                    </p:submenu>
+                
+                <p:menuitem value="Sair" action="#{cLogin.fazerLogout()}" />
+                
+                
+                <f:facet name="options">
+                    <p:outputLabel value="Olá, Aluno(a) #{AlunoLogado.nome}"/>
+                </f:facet>
+                
+            </p:menubar>  
+            <p:separator/>
+            
+            
+            
+        </h:form>
+    </h:body>
+</html>
+

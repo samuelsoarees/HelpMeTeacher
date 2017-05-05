@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Cadastrar Aluno</title>
+        
+        
+    </h:head>
+    <h:body>
+
+        <h:form id="formCadAluno">
+            <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+            <c:if test="#{cAdmin.verificaLogadoAdmin()}">
+            <ui:include src="MenuAdmin.xhtml"/>
+            </c:if>
+            
+            
+            <p:fieldset legend="Cadastrar Aluno" style=" border-color: white;  ">
+                
+                    
+                
+                <p:panelGrid  columns="3" >
+                    
+                    <h:outputText value="Nome*: "/>
+                    <p:inputText id="nome" value="#{cAluno.bAluno.nome}" required="true"
+                                 requiredMessage="O nome é Obrigatório" />
+                    <p:message for="nome" />
+                    
+                    <h:outputText value="Sexo*:"/>
+                    <p:selectOneMenu id="sexo" value="#{cAluno.bAluno.sexo}" required="true" requiredMessage="O sexo é obrigatório" >
+                        <f:selectItem itemLabel="Selecione..." itemValue=""/>
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                    </p:selectOneMenu>
+                    <p:message for="sexo"/>
+                    
+                    
+                    <h:outputText value="Telefone: "/>
+                    <p:inputText id="telefone" value="#{cAluno.bAluno.telefone}"/>
+                    <h:outputText value=""/>
+                    
+
+                    <h:outputText value="Materia Favorita: "/>
+                    <p:inputText id="materiaF" value="#{cAluno.bAluno.materiafavorita}"/>
+                    <h:outputText value=""/>
+                    
+                    <h:outputText value="Email*: "/>
+                    <p:inputText id="emailE" value="#{cAluno.bAluno.email}" required="true"
+                                 requiredMessage="O email é obrigatório"/>
+                    <p:message for="emailE"/>
+                    
+                    
+                    <h:outputText value="Senha*: "/>
+                    <p:password id="senha" value="#{cAluno.bAluno.senha}" required="true"
+                                requiredMessage="A senha é obrigatório"/>
+                    <p:message for="senha"/>
+
+                    <h:outputText value="Confirma Senha: "/>
+                    <p:password id="confirmaSenha" value="#{cAluno.bAluno.confirmaSenha}"/>
+                    <p:message for="confirmaSenha"/>
+
+                    <p:commandButton value="Cadastrar" oncomplete="PF('widDial').show()"  />
+                   
+                    
+
+                </p:panelGrid>
+
+            </p:fieldset>
+
+
+            <p:dialog id="dial" resizable="false" modal="true" visible="false" widgetVar="widDial">
+                <f:facet name="header">
+                    Atenção!!!
+                </f:facet>
+
+                <h:outputText value="Deseja realmente cadastrar este Aluno?"/><br/>
+                <f:facet name="footer">
+                    <center>
+                    <p:commandButton value="sim" action="#{cAluno.inserir()}" update="formCadAluno"/>
+                    <p:commandButton  value="não" oncomplete="PF('widDial').hide()"/>
+                    </center>  
+                </f:facet>
+
+            </p:dialog>
+
+        </h:form>
+        <h:form>
+            <h:commandButton value="Home" action="TelaLogin.xhtml"/>
+        </h:form>
+
+    </h:body>
+
+
+</html>
+

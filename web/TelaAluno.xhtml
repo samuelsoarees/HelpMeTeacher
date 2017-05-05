@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tela inicial de #{AlunoLogado.nome}</title>
+    </h:head>
+    <h:body>
+    
+        <p:growl id="gro" life="5000"/>
+        
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+        <ui:include src="MenuAluno.xhtml"/>
+        
+        <h:form id="conversas">
+            
+            <p:dataTable id="tabela" var="conversas" value="#{cChat.recuperaChatAluno()}" emptyMessage="Você não possui conversas">
+                <f:facet name="header">
+                    Suas Conversas
+                </f:facet>
+                
+                <p:column headerText="Professores" >
+                    <h:outputText value="#{conversas.prof.nome}"/>
+                </p:column>
+                
+                <p:column headerText="Materia Lecionada" >
+                    <h:outputText value="#{conversas.prof.materiaLeciona}"/>
+                </p:column>
+                
+                <p:column headerText="Operações" style="width: 13%">
+                    
+                    <p:commandButton icon="ui-icon-comment" title="Abrir Conversa" action="TelaConversaAluno.xhtml">
+                        
+                        <f:setPropertyActionListener value="#{conversas}" target="#{cChat.selectedChat}"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton icon="ui-icon-trash" title="Deletar Conversa" oncomplete="PF('widDial').show()" >
+                        
+                        <f:setPropertyActionListener value="#{conversas}" target="#{cChat.selectedChat}"/>
+                    </p:commandButton>
+                    
+                    
+                </p:column>
+                
+            </p:dataTable>
+            
+            
+            
+            <p:dialog id="dial" resizable="false" modal="true" visible="false" widgetVar="widDial"
+                      >
+                <f:facet name="header">
+                    Atenção!!!
+                </f:facet>
+                
+                <h:outputText value="Se você excluir essa conversa, todas as mensagens serão excluidas!! Deseja continuar?"/><br/>
+                <f:facet name="footer">
+                    <center>
+                    <p:commandButton value="sim" action="#{cChat.deletaChat()}"  update="conversas"/>
+                    <p:commandButton  value="não" oncomplete="PF('widDial').hide()"/>
+                    </center>
+                </f:facet>
+                
+            </p:dialog>
+
+        </h:form>
+
+        
+        
+        
+    </h:body>
+</html>
+

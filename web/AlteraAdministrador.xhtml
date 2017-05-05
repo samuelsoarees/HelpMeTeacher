@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Alterar Administrador</title>
+    </h:head>
+    <h:body>
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+        <ui:include src="MenuAdmin.xhtml"/>
+
+        <h:form id="formAltAdmin">
+            
+            <c:if test="#{cAdmin.verificaLogadoAdmin()}" >
+            <p:fieldset legend="Alterar Aluno" style=" border-color: white;  ">
+                <p:panelGrid columns="3">
+
+                    <h:outputText value="Nome:* "/>
+                    <p:inputText id="nome" value="#{AdminLogado.nome}" required="true"
+                                 requiredMessage="O nome é obrigatório"/>
+                    <p:message for="nome"/>
+                    
+                    <h:outputText value="Número de Administrador:* "/>
+                    <p:inputText id="numero" value="#{AdminLogado.login}" required="true"
+                                 requiredMessage="O número de administrador é obrigatório"/>
+                    <p:message for="numero"/>
+                    
+                    
+                    <h:outputText value="Senha:* "/>
+                    <p:inputText id="senhaadm" type="password" value="#{AdminLogado.senha}" required="true"
+                                 requiredMessage="A senha é obrigatória"/>
+                    <p:message for="senhaadm"/>
+                    
+                    
+                    <p:commandButton value="Alterar" oncomplete="PF('widDial').show()"/>
+                    
+                    
+                </p:panelGrid>
+            </p:fieldset>
+            
+            
+             <p:dialog id="dial" resizable="false" modal="true" visible="false" widgetVar="widDial"
+                      >
+                <f:facet name="header">
+                    Atenção!!!
+                </f:facet>
+                
+                <h:outputText value="Deseja confimar alteração?"/><br/>
+                <f:facet name="footer">
+                    
+                    <center>
+                        <p:commandButton value="sim" action="#{cAdmin.alteraAdm()}"  update="formAltAdmin"/>
+                    <p:commandButton  value="não" oncomplete="PF('widDial').hide()"/>
+                    </center>
+                </f:facet>
+                
+            </p:dialog>
+            </c:if>
+            </h:form>
+    </h:body>
+</html>
+

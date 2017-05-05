@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tela inicial de #{ProfessorLogado.nome}</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" life="5000"/>
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+        <ui:include src="MenuProfessor.xhtml"/>
+        
+        <h:form id="conversas">
+            
+            <p:dataTable id="tabela" var="conversas" value="#{cChat.recuperaChatsProfessor()}" emptyMessage="Você não possui conversas com ninguém">
+                <f:facet name="header">
+                    Suas Conversas
+                </f:facet>
+                
+                <p:column headerText="Alunos" >
+                    <h:outputText value="#{conversas.aluno.nome}"/>
+                </p:column>
+                
+                <p:column headerText="Materias Favoritas" >
+                    <h:outputText value="#{conversas.aluno.materiaFavorita}"/>
+                </p:column>
+                
+                <p:column headerText="Operações" style="width: 13%">
+                    
+                    <p:commandButton icon="ui-icon-comment" title="Abrir Conversa" action="TelaConversaProfessor.xhtml">
+                        
+                        <f:setPropertyActionListener value="#{conversas}" target="#{cChat.selectedChat}"/>
+                    </p:commandButton>
+                    
+                    
+                    
+                    
+                </p:column>
+                
+            </p:dataTable>
+        
+        </h:form>
+    </h:body>
+</html>
+

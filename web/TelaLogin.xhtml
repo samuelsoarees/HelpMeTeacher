@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <title>Bem Vindo ao Help Me Teacher</title>
+
+        <style>
+            
+            #login-dialog {
+                width: 260px;
+                margin: auto;
+                margin-top: 10px;
+                background-color: #DCDCDC;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                width: 35%
+            }
+            .grid-login {
+                background-color: #DCDCDC;
+                border-color: #DCDCDC;
+
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+
+        <div id="login-dialog">
+            <h:form id="loginForm">
+                <p:messages showDetail="true"/>
+
+                <p:fieldset legend="Login" styleClass="grid-login">
+                    <h:panelGrid columns="2" styleClass="grid-login" >
+
+                        <h:outputText value="Email: "/>
+                        <p:inputText id="email" value="#{cLogin.email}"/>
+
+                        <h:outputText value="Senha: "/>
+                        <p:password id="senha" value="#{cLogin.senha}"/>
+
+
+                        <center>
+                            <p:commandButton value="Fazer Login" action="#{cLogin.fazerLogin()}" update="loginForm" />
+                        </center>
+
+                    </h:panelGrid>
+
+                </p:fieldset>
+                <p:commandLink style="margin-left: 3%" action="CadastroAluno.xhtml" value="Cadastrar Aluno"/>
+                <p:commandLink style="position:relative; margin-left: 30%; margin-top: 10%  " action="QuemSomos.xhtml" value="Quem Somos?"/>
+
+            </h:form>
+
+        </div>
+
+    </h:body>
+</html>
+

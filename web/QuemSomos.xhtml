@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Quem Somos?</title>
+
+    </h:head>
+    <h:body>
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%" /> <br/>
+
+        <p:separator/>
+
+        <h:form id="LoginForm">
+
+
+
+            <p:outputPanel style="margin-left: 20%;margin-right: 20%">
+                
+                <p>  O site Help me Teacher tem como objetivo ajudar os alunos do Instituto Federal,
+                    a tirar dúvidas com os Professores. Você poderá conversar com eles em tempo real, e é totalmente voltado a aprendizagem do aluno.
+                    Os professores colocarão suas materias que mais gostam de ensinar, e você poderá filtrar isso, e procurar quais 
+                    professores ensinam a sua matéria favorita.<br/><br/>
+
+
+                    Para se cadastrar no sistema é fácil, na tela de login você encontra o local de cadastro,
+                    e depois de concluir, é só entrar. Para os professores, é diferente. Eles tem de entrar em contato com 
+                    o administrador do sistema, portando consigo o número de matricula. E será realizado o cadastro.<br/><br/>
+
+                    Em breve teremos mais atualizações, e aproveitem o Help Me Teacher!!
+                </p>
+
+            </p:outputPanel>
+
+
+
+
+
+            <center>
+                <p:commandButton action="TelaLogin.xhtml" value="Home"  update="LoginForm"/>
+            </center>
+
+        </h:form>
+    </h:body>
+</html>
+

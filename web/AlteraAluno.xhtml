@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Alterar Aluno</title>
+    </h:head>
+    <h:body>
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+        <ui:include src="MenuAluno.xhtml"/>
+        <h:form id="formAltAluno">
+            
+            <p:fieldset legend="Alterar Aluno" style=" border-color: white;  ">
+                <p:panelGrid columns="3">
+                    
+                    <h:outputText value="Nome:* "/>
+                    <p:inputText id="nome" value="#{AlunoLogado.nome}" required="true"
+                                 requiredMessage="O nome é obrigatório"/>
+                    <p:message for="nome"/>
+                    
+                    
+                     <h:outputText value="Sexo*: "/>
+                    <p:selectOneMenu id="sexo" value="#{AlunoLogado.sexo}" required="true" requiredMessage="O sexo é obrigatório" >
+                        <f:selectItem itemLabel="Selecione..." itemValue=""/>
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                    </p:selectOneMenu>
+                    <p:message for="sexo"/>
+                    
+                    
+                    <h:outputText value="Telefone: "/>
+                    <p:inputText id="telefone" value="#{AlunoLogado.telefone}"/>
+                    <h:outputText value=""/>
+                    
+
+                    <h:outputText value="Materia Favorita: "/>
+                    <p:inputText id="materiaF" value="#{AlunoLogado.materiaFavorita}"/>
+                    <h:outputText value=""/>
+                    
+                    <h:outputText value="Email*: "/>
+                    <p:inputText id="email" value="#{AlunoLogado.email}" required="true"
+                                 requiredMessage="O email é obrigatório"/>
+                    <p:message for="email"/>
+                    
+                    
+                    <h:outputText value="Senha*: "/>
+                    <p:inputText id="senha" type="password" value="#{AlunoLogado.senha}"
+                                 required="true" requiredMessage="A senha é obrigatória"/>
+                    <p:message for="senha"/>
+                    
+                    
+                    <p:commandButton value="Alterar" oncomplete="PF('widDial').show()"/>
+                    
+                    
+                    
+                    
+                    
+                <p:dialog id="dial" resizable="false" modal="true" visible="false" widgetVar="widDial"
+                      >
+                <f:facet name="header">
+                    Atenção!!!
+                </f:facet>
+                
+                <h:outputText value="Deseja confimar alteração?"/><br/>
+                <f:facet name="footer">
+                    <center>
+                    <p:commandButton value="sim" action="#{cAluno.alterar()}"  update="formAltAluno"/>
+                    <p:commandButton  value="não" oncomplete="PF('widDial').hide()"/>   
+                    </center>
+                </f:facet>
+                
+            </p:dialog>
+                    
+                    
+                    
+                </p:panelGrid>
+                
+                
+                
+            </p:fieldset>
+            
+            
+            
+            
+            
+            
+        </h:form>
+        
+        
+        
+    </h:body>
+</html>
+

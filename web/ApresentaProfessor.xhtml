@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Dados do Professor</title>
+    </h:head>
+    <h:body>
+        
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%" />
+        <ui:include src="MenuProfessor.xhtml"/>
+        <h:form id="formAprProf">
+            <p:messages/>
+             
+            <p:fieldset legend="Dados de Professor" style=" border-color: white;  ">
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Nome: "/>
+                    <h:outputText id="nome" value="#{ProfessorLogado.nome}"/>
+                    
+                    <h:outputText value="Sexo: "/>
+                    <h:outputText  value="#{ProfessorLogado.sexo}"/>
+                    
+                    <h:outputText value="Telefone: "/>
+                    <h:outputText  value="#{ProfessorLogado.telefone}"/>
+
+                    <h:outputText value="Materia Lecionada: "/>
+                    <h:outputText  value="#{ProfessorLogado.materiaLeciona}"/>
+                    
+                    <h:outputText value="Número de Matricula "/>
+                    <h:outputText  value="#{ProfessorLogado.nMatricula}"/>
+
+
+                    <h:outputText value="Email: "/>
+                    <h:outputText  value="#{ProfessorLogado.email}"/>
+
+
+
+
+                    <p:panel>
+                        <p:commandButton icon="ui-icon-pencil" oncomplete="location.href='AlteraProfessor.xhtml'" title="Alterar"/> 
+                        <p:commandButton icon="ui-icon-trash" oncomplete="PF('widDialdelete').show()" title="Deletar"/>    
+                    </p:panel>
+                    
+                </p:panelGrid>
+
+            </p:fieldset>
+            
+
+            <p:dialog id="dial" resizable="false" modal="true" visible="false" widgetVar="widDialdelete"
+                      >
+                <f:facet name="header">
+                    Atenção!!!
+                </f:facet>
+
+                <h:outputText value="Deseja deletar sua conta?"/><br/>
+                <f:facet name="footer">
+                    <p:commandButton value="sim" action="#{cProfessor.deletar()}"/>
+                    <p:commandButton style="position: relative; left: 40%" value="não" oncomplete="PF('widDial').hide()" update="formAprProf"/>
+                </f:facet>
+
+            </p:dialog>
+            </h:form>
+    </h:body>
+</html>
+

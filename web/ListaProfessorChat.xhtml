@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Iniciar Conversa</title>
+    </h:head>
+    <h:body>
+        
+        <p:graphicImage library="Imagens" url="/Imagens/logo.png" style="position:relative;left: 21%"/>
+        <ui:include src="MenuAluno.xhtml"/>
+        <h:form id="formularioApresentacaoProfessor">
+            
+            <p:dataTable id="tabela" var="professores" value="#{cProfessor.recuperaTodosProfessores()}"
+                         paginator="true" rows="10" emptyMessage="Não há professores Cadastrados">
+                <f:facet name="header">
+                    Professores Cadastrados
+                </f:facet>
+                <p:column headerText="Nome" filterBy="#{professores.nome}">
+                    <h:outputText value="#{professores.nome}"/>
+                </p:column>
+                <p:column headerText="Email" >
+                    <h:outputText value="#{professores.email}"/>
+                </p:column>
+                <p:column headerText="Materia Lecionada" filterBy="#{professores.materiaLeciona}">
+                    <h:outputText value="#{professores.materiaLeciona}"/>
+                </p:column>
+
+                <p:column headerText="Operações" style="width: 13%">
+
+                    <p:commandButton icon="ui-icon-search" oncomplete="PF('widDialVisualiza').show()"
+                                     update=':formularioApresentacaoProfessor:dialVisualiza' title="visualizar">
+                        <f:setPropertyActionListener value="#{professores}" target="#{cProfessor.selectedProfessor}"/>
+                    </p:commandButton>
+                    
+                    
+                    
+                    <p:commandButton icon="ui-icon-plus" title="Criar Chat" oncomplete="PF('widDialIniciaChat').show()"
+                                     update=":formularioApresentacaoProfessor:dialIniciaChat">
+                        <f:setPropertyActionListener value="#{professores}" target="#{cProfessor.selectedProfessor}"/>
+                    </p:commandButton>
+
+
+                </p:column>
+
+            </p:dataTable>
+            
+
+            <p:dialog id="dialVisualiza" visible="false" resizable="false" modal="true"
+                      widgetVar="widDialVisualiza">
+
+                <p:panelGrid columns="2">
+                    <h:outputText value="Nome:"/>
+                    <h:outputText value="#{cProfessor.selectedProfessor.nome}"/>
+
+                    <h:outputText value="Sexo:"/>
+                    <h:outputText value="#{cProfessor.selectedProfessor.sexo}"/>
+
+                    <h:outputText value="Telefone:"/>
+                    <h:outputText value="#{cProfessor.selectedProfessor.telefone}"/>
+
+                    <h:outputText value="Materia Lecionada:"/>
+                    <h:outputText value="#{cProfessor.selectedProfessor.materiaLeciona}"/>
+
+                    <h:outputText value="Email:"/>
+                    <h:outputText value="#{cProfessor.selectedProfessor.email}"/>
+
+
+                </p:panelGrid>
+
+            </p:dialog>
+
+            
+            
+            <p:dialog id="dialIniciaChat" resizable="false" modal="true" visible="false" widgetVar="widDialIniciaChat"
+                              >
+                        <f:facet name="header">
+                            Atenção!!!
+                        </f:facet>
+
+                <h:outputText value="Deseja iniciar chat com o Professor(a) #{cProfessor.selectedProfessor.nome}?"/><br/>
+                        <f:facet name="footer">
+                            <center>
+                            <p:commandButton value="sim" action="#{cChat.criarChat(cProfessor.selectedProfessor)}"  update="formularioApresentacaoProfessor"/>
+                            <p:commandButton  value="não" oncomplete="PF('widDialIniciaChat').hide()"/>
+                            </center>
+                        </f:facet>
+
+                    </p:dialog>
+
+        </h:form>
+    </h:body>
+</html>
+
